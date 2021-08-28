@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../form/form.component'
+import CustomForm from '../custom-form/custom-form.component'
 import CustomLabel from '../custom-label/custom-label.component'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
@@ -9,7 +9,7 @@ import './post-job.styles.scss'
 const PostJob = () => {
     return (
         <div>
-            <Form title='Post a Job'>
+            <CustomForm title='Post a Job'>
                 <CustomLabel id='jobTitle'>Job title*</CustomLabel>
                 <FormInput
                     id='jobTitle'
@@ -27,7 +27,7 @@ const PostJob = () => {
                 <div className="post-button-container">
                     <CustomButton>Post</CustomButton>
                 </div>
-            </Form>
+            </CustomForm>
         </div>
     );
 };

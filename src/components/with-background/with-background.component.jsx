@@ -5,7 +5,6 @@ const WithBackground = (WrappedComponent) => ({classic}) => {
     return (
         <div>
             <div className={`${classic ? 'classic' : ''} background1`}></div>
-            <div className={`${classic ? 'classic' : ''} background2`}></div>
             <WrappedComponent />
         </div>
     )

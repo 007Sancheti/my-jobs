@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import { withRouter } from 'react-router';
 import './header.styles.scss';
 import Avatar from 'react-avatar';
 import CustomButton from '../custom-button/custom-button.component';
 
-const Header = () => {
+const Header = ({history}) => {
     const [showLogout, setShowLogout] = useState(false);
     const [isLoggedIn] = useState(false);
     const [isLoginOrSignUpPage] = useState(false);
@@ -19,10 +20,10 @@ const Header = () => {
                 <div className="dropdown" onClick={()=>setShowLogout(prevState => !prevState)}></div>
                 {showLogout && <div className="logout-button">Logout</div>}
             </div>):
-            !isLoginOrSignUpPage && (<CustomButton padding="14px 23px" classic>Login/Signup</CustomButton>)
+            !isLoginOrSignUpPage && (<CustomButton onClick={()=>{history.push('/login')}} padding="14px 23px" classic>Login/Signup</CustomButton>)
             }
         </div>
     );
 };
 
-export default Header;
+export default withRouter(Header);

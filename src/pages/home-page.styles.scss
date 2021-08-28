@@ -1,0 +1,35 @@
+.home-page {
+    padding-top: 60px;
+    padding-left: 120px;
+    padding-right: 120px;
+    h1 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    .welcome-container {
+        color: white;
+        .get-started {
+            padding-top: 20px;
+        }
+    }
+    .why-us-container {
+        margin-top: 120px;
+    }
+    .heading {
+        text-transform: capitalize;
+        color:#303F60;
+    }
+    .companies-container {
+        margin-top: 80px;
+    }
+    .office-girl-image {
+        position: absolute;
+        top: 120px;
+        right: 250px;
+        width: 450px;
+        height: 295px;
+        border-radius: 20px;
+        background-image: url('../assets/office-girl.jpg');
+        background-size: cover;
+    }
+}

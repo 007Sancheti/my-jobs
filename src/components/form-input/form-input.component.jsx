@@ -1,10 +1,25 @@
 import React from 'react';
+import { Field, ErrorMessage } from 'formik';
 
 import './form-input.styles.scss';
 
-const FormInput = ({ handleChange, id, placeholder, ...otherProps }) => {
+const FormInput = ({
+    id,
+    errormessage,
+    touched,
+    ...otherProps
+}) => {
     return (
-            <input className='form-input' id={id} placeholder = {placeholder} onChange={handleChange} {...otherProps} />
+        <div className="input-container">
+            <Field
+                className='form-input'
+                id={id}
+                {...otherProps}
+            />
+            <div className='error-message'>
+                <ErrorMessage name={id} />
+            </div>
+        </div>
     );
 };
 

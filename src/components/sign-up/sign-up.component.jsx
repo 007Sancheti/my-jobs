@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Form from '../form/form.component';
+import { Link } from 'react-router-dom';
+import CustomForm from '../custom-form/custom-form.component';
 import CustomLabel from '../custom-label/custom-label.component';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
@@ -12,7 +13,7 @@ const SignUp = () => {
     }, [userType])
     return (
         <div className='signup'>
-            <Form title='Signup'>
+            <CustomForm title='Signup'>
                 <CustomLabel>I'm a*</CustomLabel>
                 <div className='buttons-container mg-b-20'>
                     <CustomButton
@@ -109,12 +110,12 @@ const SignUp = () => {
                     <CustomButton>Signup</CustomButton>
                     <div className='mt-40'>
                         <span>Have an account? </span>
-                        <a className='login-link' href='www.link.com'>
+                        <Link className='login-link' to='/login'>
                             Login
-                        </a>
+                        </Link>
                     </div>
                 </div>
-            </Form>
+            </CustomForm>
         </div>
     );
 };

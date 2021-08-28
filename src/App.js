@@ -13,7 +13,7 @@ import Header from './components/header/header.component';
 import WithBackground from './components/with-background/with-background.component';
 // import Form from './components/form/form.component';
 import Login from './components/login/login.component';
-// import SignUp from './components/sign-up/sign-up.component';
+import SignUp from './components/sign-up/sign-up.component';
 // import PostJob from './components/post-job/post-job.component';
 import HomePage from './pages/home-page.component';
 
@@ -170,6 +170,17 @@ function App() {
                             <Redirect to='/' />
                         ) : (
                             <Login />
+                        )
+                    }
+                />
+                <Route
+                    exact
+                    path='/signup'
+                    render={() =>
+                      isLoggedIn ? (
+                            <Redirect to='/' />
+                        ) : (
+                            <SignUp />
                         )
                     }
                 />
