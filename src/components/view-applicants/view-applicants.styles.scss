@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #a9afbc;
+}
+
+.applicants-heading {
+    color: #303f60;
+}
+
+.close-icon {
+    cursor: pointer;
+    color: #303f60;
+}
+
+.subheader {
+    font: normal normal normal 15px/17px Helvetica Neue;
+    margin-top: 11px;
+}
+
+.no-applications-image-container {
+    min-height: 440px;
+    background: lightcyan;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-applications-image {
+    width: 85px;
+    height: 106px;
+    background-image: url('../../assets/curriculum.png');
+    background-size: 100%;
+    object-fit: contain;
+}
+
+.no-application-text {
+    color: #303F60;
+    font: normal normal normal 20px/24px Helvetica Neue;
+}

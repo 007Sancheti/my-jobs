@@ -1,0 +1,42 @@
+.signup {
+    .buttons-container {
+        width: 250px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .mg-b-20 {
+        margin-bottom: 20px;
+    }
+    .password-container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .create-password-container {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .confirm-password-container {
+            flex: 1;
+        }
+    }
+    .group-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+        .mt-40 {
+            margin-top: 40px;
+        }
+        .login-link {
+            text-decoration: none;
+            color: #43AFFF;
+            font: normal normal medium 16px/19px Helvetica Neue;
+            margin-bottom: 8px;
+            &:visited {
+                color: #43AFFF;
+            }
+        }
+    }
+}

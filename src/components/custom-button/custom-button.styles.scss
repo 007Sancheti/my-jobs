@@ -1,0 +1,17 @@
+.custom-button {
+    background: #43AFFF;
+    border: 1px solid #43afff;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 14px 53px;
+
+    &.classic {
+        background: #43AFFF33;
+    }
+    &.inverted {
+        color: black;
+        background: #E8E8E833;
+        border-color: #C6C6C6;
+    }
+}

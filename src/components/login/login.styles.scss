@@ -1,0 +1,32 @@
+.flex-sb {
+    display: flex;
+    justify-content: space-between;
+    .forgot-password-link {
+        text-decoration: none;
+        color: #43AFFF;
+        font: normal normal medium 14px/17px Helvetica Neue;
+        margin-bottom: 8px;
+        &:visited {
+            color: #43AFFF;
+        }
+    }
+}
+.group-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    .mt-50 {
+        margin-top: 50px;
+    }
+    .create-account-link {
+        text-decoration: none;
+        color: #43AFFF;
+        font: normal normal medium 16px/19px Helvetica Neue;
+        margin-bottom: 8px;
+        &:visited {
+            color: #43AFFF;
+        }
+    }
+}
