@@ -39,9 +39,9 @@ const Login = () => {
                 />
                 <div className='flex-sb'>
                     <CustomLabel id='password'>Password</CustomLabel>
-                    <a className='forgot-password-link' href='www.link.com'>
+                    <Link className='forgot-password-link' to='/forgot'>
                         Forgot your password?
-                    </a>
+                    </Link>
                 </div>
                 <FormInput
                     id='password'

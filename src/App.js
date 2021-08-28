@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import React, {useState} from 'react';
-import './App.css';
+import './App.scss';
 // import FormInput from './components/form-input/form-input.component';
 // import FormTextarea from './components/form-textarea/form-textarea.component';
 // import CustomLabel from './components/custom-label/custom-label.component';
@@ -16,6 +16,8 @@ import Login from './components/login/login.component';
 import SignUp from './components/sign-up/sign-up.component';
 // import PostJob from './components/post-job/post-job.component';
 import HomePage from './pages/home-page.component';
+import ForgotPassword from './components/forgot-password/forgot-password.component';
+import ResetPassword from './components/reset-password/reset-password.component';
 
 function App() {
     const items = [
@@ -181,6 +183,28 @@ function App() {
                             <Redirect to='/' />
                         ) : (
                             <SignUp />
+                        )
+                    }
+                />
+                <Route
+                    exact
+                    path='/forgot'
+                    render={() =>
+                      isLoggedIn ? (
+                            <Redirect to='/' />
+                        ) : (
+                            <ForgotPassword />
+                        )
+                    }
+                />
+                <Route
+                    exact
+                    path='/reset'
+                    render={() =>
+                      isLoggedIn ? (
+                            <Redirect to='/' />
+                        ) : (
+                            <ResetPassword />
                         )
                     }
                 />
