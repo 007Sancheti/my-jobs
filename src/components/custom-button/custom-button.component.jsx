@@ -14,9 +14,9 @@ const CustomButton = ({
     return (
         <button
             style={{ padding, fontSize }}
-            className={`${invertedBlue ? 'inverted-blue' : ''} ${inverted ? 'inverted' : ''} ${
-                classic ? 'classic' : ''
-            } custom-button`}
+            className={`${invertedBlue ? 'inverted-blue' : ''} ${
+                inverted ? 'inverted' : ''
+            } ${classic ? 'classic' : ''} custom-button`}
             {...otherProps}
         >
             {children}

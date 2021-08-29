@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { selectError } from '../../redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
+import WithToast from '../../higher-order-components/with-toast-hoc/with-toast.component';
 import { Link } from 'react-router-dom';
 import CustomForm from '../custom-form/custom-form.component';
 import CustomLabel from '../custom-label/custom-label.component';
@@ -20,11 +23,16 @@ let validationSchema = Yup.object({
     password: Yup.string().min(6).required('Required!'),
 });
 
-const Login = ({ emailSignInStartAsync }) => {
+const Login = ({ emailSignInStartAsync, error, toast }) => {
     const onSubmit = (values) => {
         console.log('Form data', values);
         emailSignInStartAsync(values);
     };
+    useEffect(() => {
+        if (error) {
+            toast(error.data.message);
+        }
+    }, [error]);
     return (
         <Formik
             initialValues={initialValues}
@@ -65,9 +73,13 @@ const Login = ({ emailSignInStartAsync }) => {
     );
 };
 
+const mapStateToProps = createStructuredSelector({
+    error: selectError,
+});
+
 const mapDispatchToProps = (dispatch) => ({
     emailSignInStartAsync: (payload) =>
         dispatch(emailSignInStartAsync(payload)),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(WithToast(Login));

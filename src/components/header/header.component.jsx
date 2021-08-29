@@ -18,7 +18,7 @@ const Header = ({
     const [showLogout, setShowLogout] = useState(false);
     return (
         <div className='header-container'>
-            <Link className='logo' to="/">
+            <Link className='logo' to='/'>
                 <span style={{ color: '#fff' }}>My</span>
                 <span style={{ color: '#43AFFF' }}>Jobs</span>
             </Link>

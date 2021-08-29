@@ -3,9 +3,8 @@ import Avatar from 'react-avatar';
 import './applicant-card.styles.scss';
 
 const ApplicantCard = ({ applicant }) => {
-    console.log(applicant);
     return (
-        <div className="applicant-card">
+        <div className='applicant-card'>
             <div className='flex-row'>
                 <Avatar
                     className='avatar'
@@ -17,11 +16,11 @@ const ApplicantCard = ({ applicant }) => {
                     round
                 />
                 <div className='flex-column'>
-                    <h3 className="applicant-name">{applicant.name}</h3>
-                    <p className="applicant-email">{applicant.email}</p>
+                    <h3 className='applicant-name'>{applicant.name}</h3>
+                    <p className='applicant-email'>{applicant.email}</p>
                 </div>
             </div>
-            <div className="skills">
+            <div className='skills'>
                 <h5>Skills</h5>
                 <p>{applicant.skills}</p>
             </div>

@@ -8,7 +8,7 @@ export const login = (payload) => {
             sessionStorage.setItem('user', JSON.stringify(res.data.data));
             return res.data.data;
         })
-        .catch((err) => Promise.reject(err));
+        .catch((err) => Promise.reject(err.response));
 };
 
 export const signup = (payload) => {
@@ -49,4 +49,34 @@ export const getAllApplicants = (jobId, headers) => {
             return res.data;
         })
         .catch((err) => Promise.reject(err));
+};
+
+export const forgotPassword = (email) => {
+    const url = `https://jobs-api.squareboat.info/api/v1/auth/resetpassword?email=${email}`;
+    return axios
+        .get(url)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => Promise.reject(err));
+};
+
+export const resetPassword = (resetToken) => {
+    const url = `https://jobs-api.squareboat.info/api/v1/auth/resetpassword/${resetToken}`;
+    return axios
+        .get(url)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => Promise.reject(err));
+};
+
+export const changePassword = (payload) => {
+    const url = `https://jobs-api.squareboat.info/api/v1/auth/resetpassword`;
+    return axios
+        .post(url, payload)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => Promise.reject(err.response));
 };

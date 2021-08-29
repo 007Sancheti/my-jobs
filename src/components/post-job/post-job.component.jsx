@@ -7,8 +7,9 @@ import FormTextarea from '../form-textarea/form-textarea.component';
 import { Formik } from 'formik';
 import { postJob } from '../../api';
 import * as Yup from 'yup';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import WithToast from '../../higher-order-components/with-toast-hoc/with-toast.component';
+
 import './post-job.styles.scss';
 
 const initialValues = {
@@ -23,7 +24,7 @@ let validationSchema = Yup.object({
     location: Yup.string().required('Required!'),
 });
 
-const PostJob = ({ history }) => {
+const PostJob = ({ toast }) => {
     const onSubmit = (values, onSubmitProps) => {
         console.log('formdata', values);
         let currentUser = JSON.parse(sessionStorage.getItem('user'));
@@ -37,7 +38,6 @@ const PostJob = ({ history }) => {
     };
     return (
         <div>
-            <ToastContainer />
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -73,4 +73,4 @@ const PostJob = ({ history }) => {
     );
 };
 
-export default PostJob;
+export default WithToast(PostJob);

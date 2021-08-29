@@ -40,7 +40,9 @@ const JobsPreview = ({ currentUser }) => {
                     titleColor='#303F60'
                     items={slicedItems}
                 />
-            ) : <NoJobs />}
+            ) : (
+                <NoJobs />
+            )}
             {items.length ? (
                 <PaginationContainer
                     items={items}

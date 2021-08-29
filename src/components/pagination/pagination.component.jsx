@@ -7,7 +7,6 @@ const PAGE_LIMIT = 8;
 
 const PaginationContainer = ({ items, setSlicedItems }) => {
     let count = Math.ceil(items.length / PAGE_LIMIT);
-    console.log(items);
     const handleChange = (event, value) => {
         setPage(value);
         setPagination(value);

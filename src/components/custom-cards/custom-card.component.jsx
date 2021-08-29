@@ -14,7 +14,6 @@ const CustomCard = ({
 }) => {
     const [open, setOpen] = useState(false);
     const [applicants, setApplicants] = useState([]);
-    console.log(applicants);
     const handleOpen = () => {
         let currentUser = JSON.parse(sessionStorage.getItem('user'));
         let headers = {
@@ -53,7 +52,10 @@ const CustomCard = ({
                         View Applications
                     </CustomButton>
                     <TransitionsModal open={open} setOpen={setOpen}>
-                        <ViewApplicants applicants={applicants} setOpen={setOpen} />
+                        <ViewApplicants
+                            applicants={applicants}
+                            setOpen={setOpen}
+                        />
                     </TransitionsModal>
                 </div>
             )}

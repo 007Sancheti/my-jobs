@@ -1,12 +1,12 @@
-import React from 'react'
-import './custom-button.styles.scss'
+import React from 'react';
+import './custom-button.styles.scss';
 
 const CustomLabel = ({ id, children }) => {
     return (
-        <label className="input-label" htmlFor={id}>
+        <label className='input-label' htmlFor={id}>
             {children}
         </label>
-    )
-}
+    );
+};
 
-export default CustomLabel
+export default CustomLabel;
