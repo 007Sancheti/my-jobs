@@ -17,8 +17,8 @@ const onSubmit = (values) => {
 };
 
 let validationSchema = Yup.object({
-    newPassword: Yup.string().required('Required!'),
-    confirmNewPassword: Yup.string().required('Required!'),
+    newPassword: Yup.string().min(6).required('Required!'),
+    confirmNewPassword: Yup.string().min(6).required('Required!'),
 });
 
 const ResetPassword = () => {

@@ -6,32 +6,38 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import './sign-up.styles.scss';
 
 const initialValues = {
-    fullName: '',
+    name: '',
     email: '',
-    createPassword: '',
+    password: '',
     confirmPassword: '',
     skills: '',
 };
 
-const onSubmit = (values) => {
-    console.log('Form data', values);
-};
 
 let validationSchema = Yup.object({
-    fullName: Yup.string().required('Required!'),
+    name: Yup.string().required('Required!'),
     email: Yup.string().email('Invalid email format').required('Required!'),
-    createPassword: Yup.string().required('Required!'),
-    confirmPassword: Yup.string().required('Required!'),
+    password: Yup.string().min(6).required('Required!'),
+    confirmPassword: Yup.string().min(6).required('Required!'),
 });
 
 const SignUp = () => {
-    const [userType, setUserType] = useState('Recruiter');
+    const onSubmit = (values) => {
+        values.userRole = userRole;
+        console.log('Form data', values);
+        axios
+            .post('https://jobs-api.squareboat.info/api/v1/auth/register', values)
+            .then((response) => (console.log(response)));
+    };
+
+    const [userRole, setUserRole] = useState(0);
     useEffect(() => {
-        console.log(userType);
-    }, [userType]);
+        console.log(userRole);
+    }, [userRole]);
     return (
         <div className='signup'>
             <Formik
@@ -43,15 +49,13 @@ const SignUp = () => {
                     <CustomLabel>I'm a*</CustomLabel>
                     <div className='buttons-container mg-b-20'>
                         <CustomButton
+                            type='text'
                             id='recruiterButton'
                             padding='15px 28px'
                             onClick={(e) => {
-                                setUserType((prevState) => {
-                                    if (
-                                        prevState.toLowerCase() ===
-                                        e.target.innerText.toLowerCase()
-                                    )
-                                        return prevState;
+                                e.preventDefault();
+                                setUserRole((prevState) => {
+                                    if (prevState === 0) return prevState;
                                     else {
                                         let candidateButton =
                                             document.querySelector(
@@ -61,7 +65,7 @@ const SignUp = () => {
                                             'inverted'
                                         );
                                         e.target.classList.remove('inverted');
-                                        return 'Recruiter';
+                                        return 0;
                                     }
                                 });
                             }}
@@ -69,15 +73,13 @@ const SignUp = () => {
                             Recruiter
                         </CustomButton>
                         <CustomButton
+                            type='text'
                             id='candidateButton'
                             padding='15px 28px'
                             onClick={(e) => {
-                                setUserType((prevState) => {
-                                    if (
-                                        prevState.toLowerCase() ===
-                                        e.target.innerText.toLowerCase()
-                                    )
-                                        return prevState;
+                                e.preventDefault();
+                                setUserRole((prevState) => {
+                                    if (prevState === 1) return prevState;
                                     else {
                                         let recruiterButton =
                                             document.querySelector(
@@ -87,7 +89,7 @@ const SignUp = () => {
                                             'inverted'
                                         );
                                         e.target.classList.remove('inverted');
-                                        return 'Candidate';
+                                        return 1;
                                     }
                                 });
                             }}
@@ -96,10 +98,10 @@ const SignUp = () => {
                             Candidate
                         </CustomButton>
                     </div>
-                    <CustomLabel id='fullName'>Full Name*</CustomLabel>
+                    <CustomLabel id='name'>Name*</CustomLabel>
                     <FormInput
-                        id='fullName'
-                        name='fullName'
+                        id='name'
+                        name='name'
                         type='text'
                         placeholder='Enter your full name'
                     />
@@ -112,12 +114,12 @@ const SignUp = () => {
                     />
                     <div className='password-container'>
                         <div className='create-password-container'>
-                            <CustomLabel id='createPassword'>
+                            <CustomLabel id='password'>
                                 Create Password*
                             </CustomLabel>
                             <FormInput
-                                id='createPassword'
-                                name='createPassword'
+                                id='password'
+                                name='password'
                                 type='password'
                                 placeholder='Enter your password'
                             />

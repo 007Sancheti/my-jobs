@@ -6,6 +6,8 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { emailSignInStartAsync } from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
 import './login.styles.scss';
 
 const initialValues = {
@@ -13,16 +15,16 @@ const initialValues = {
     password: '',
 };
 
-const onSubmit = (values) => {
-    console.log('Form data', values);
-};
-
 let validationSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Required!'),
-    password: Yup.string().required('Required!'),
+    password: Yup.string().min(6).required('Required!'),
 });
 
-const Login = () => {
+const Login = ({ emailSignInStartAsync }) => {
+    const onSubmit = (values) => {
+        console.log('Form data', values);
+        emailSignInStartAsync(values);
+    };
     return (
         <Formik
             initialValues={initialValues}
@@ -63,4 +65,9 @@ const Login = () => {
     );
 };
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+    emailSignInStartAsync: (payload) =>
+        dispatch(emailSignInStartAsync(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

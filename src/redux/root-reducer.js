@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { issuesReducer } from './issues/issues.reducer.js';
+import userReducer from './user/user.reducer';
 
 const rootReducer = combineReducers({
-    issues: issuesReducer,
+    user: userReducer,
 });
 
 export default rootReducer;

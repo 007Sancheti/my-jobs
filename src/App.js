@@ -1,5 +1,5 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
-import React, {useState} from 'react';
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 // import FormInput from './components/form-input/form-input.component';
 // import FormTextarea from './components/form-textarea/form-textarea.component';
@@ -10,24 +10,28 @@ import './App.scss';
 // import TransitionsModal from './components/transitions-modal/transitions-modal.component';
 // import ViewApplicants from './components/view-applicants/view-applicants.component';
 import Header from './components/header/header.component';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selectors';
 import WithBackground from './components/with-background/with-background.component';
 // import Form from './components/form/form.component';
 import Login from './components/login/login.component';
 import SignUp from './components/sign-up/sign-up.component';
-// import PostJob from './components/post-job/post-job.component';
+import PostJob from './components/post-job/post-job.component';
 import HomePage from './pages/home-page.component';
 import ForgotPassword from './components/forgot-password/forgot-password.component';
 import ResetPassword from './components/reset-password/reset-password.component';
+import JobsPreview from './components/jobs-preview/jobs-preview.component';
+import { setCurrentUser } from './redux/user/user.actions';
+import usePagination from './custom-hooks/usePagination';
 
-function App() {
+function App({currentUser, setCurrentUser}) {
     const items = [
         {
             id: 1,
             title: 'Get more visibility',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
-            width: '260px',
-            titleColor: 'black',
             location: 'Bangalore',
         },
         {
@@ -35,8 +39,6 @@ function App() {
             title: 'Organize your candidates',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            width: '260px',
-            titleColor: 'black',
             location: 'Delhi',
         },
         {
@@ -44,92 +46,65 @@ function App() {
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 4,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 5,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 6,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
-        },
-        {
+        },        {
             id: 7,
-            title: 'Verify their abilities',
+            title: 'Get more visibility',
             content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
-            location: 'Pune',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+            location: 'Bangalore',
         },
         {
             id: 8,
-            title: 'Verify their abilities',
+            title: 'Organize your candidates',
             content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            location: 'Delhi',
         },
         {
             id: 9,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 10,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 11,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
         },
         {
             id: 12,
             title: 'Verify their abilities',
             content:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
-        },
-        {
-            id: 13,
-            title: 'Verify their abilities',
-            content:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
-            width: '260px',
-            titleColor: 'black',
-        },
+        }
     ];
     const [page, setPage] = React.useState(1);
+    const [data, setPagination] = usePagination(items);
     const [open, setOpen] = React.useState(false);
     const [isLoggedIn] = useState(false);
 
@@ -139,8 +114,16 @@ function App() {
 
     const handleChange = (event, value) => {
         setPage(value);
+        setPagination(value);
         handleOpen();
     };
+
+    if(!currentUser && sessionStorage.getItem('user')) {
+        setCurrentUser(JSON.parse(sessionStorage.getItem('user')));
+    }
+
+    let location = useLocation();
+    let isLoginOrSignUpPage = (location.pathname === '/login') || (location.pathname === '/signup');
 
     return (
         <div className='App'>
@@ -148,7 +131,7 @@ function App() {
                 <Route path='/:org/:repo/issues' component={IssueDetailsPage} />
                 <Route component={NotFound} />
             </Switch> */}
-            <Header />
+            <Header isLoggedIn={currentUser} isLoginOrSignUpPage={isLoginOrSignUpPage}/>
             {/* <FormTextarea>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, praesentium? Unde quibusdam nostrum tempora voluptas provident laborum laudantium doloremque aliquid!</FormTextarea>
             <CustomLabel id='email'> Email address </CustomLabel>
             <FormInput placeholder='Enter your email' id='email' />
@@ -156,56 +139,60 @@ function App() {
                 Login
             </CustomButton>
             <CustomCards items={items} />
-            <Pagination count={10} page={page} variant="outlined" color="primary" shape="rounded" onChange={handleChange}/>
             <TransitionsModal open={open} setOpen={setOpen}><ViewApplicants setOpen={setOpen}/></TransitionsModal> */}
             {/* <Form title="Login"/> */}
             {/* <Login /> */}
             {/* <SignUp /> */}
             {/* <PostJob /> */}
+            {/* <Pagination count={10} page={page} variant="outlined" color="primary" shape="rounded" onChange={handleChange}/> */}
             <Switch>
-                <Route exact path='/' component={HomePage} />
+                <Route
+                    exact
+                    path='/'
+                    render={() =>
+                        currentUser ? <Redirect to='/landing' /> : <HomePage />
+                    }
+                />
+                <Route
+                    exact
+                    path='/post-job'
+                    render={() =>
+                        currentUser ? <PostJob /> : <Redirect to='/' />
+                    }
+                />
+                <Route
+                    exact
+                    path='/landing'
+                    render={() =>
+                        currentUser ? <JobsPreview /> : <Redirect to='/' />
+                    }
+                />
                 <Route
                     exact
                     path='/login'
                     render={() =>
-                      isLoggedIn ? (
-                            <Redirect to='/' />
-                        ) : (
-                            <Login />
-                        )
+                        currentUser ? <Redirect to='/landing' /> : <Login />
                     }
                 />
                 <Route
                     exact
                     path='/signup'
                     render={() =>
-                      isLoggedIn ? (
-                            <Redirect to='/' />
-                        ) : (
-                            <SignUp />
-                        )
+                        currentUser ? <Redirect to='/landing' /> : <SignUp />
                     }
                 />
                 <Route
                     exact
                     path='/forgot'
                     render={() =>
-                      isLoggedIn ? (
-                            <Redirect to='/' />
-                        ) : (
-                            <ForgotPassword />
-                        )
+                        currentUser ? <Redirect to='/landing' /> : <ForgotPassword />
                     }
                 />
                 <Route
                     exact
                     path='/reset'
                     render={() =>
-                      isLoggedIn ? (
-                            <Redirect to='/' />
-                        ) : (
-                            <ResetPassword />
-                        )
+                        currentUser ? <Redirect to='/landing' /> : <ResetPassword />
                     }
                 />
             </Switch>
@@ -213,4 +200,12 @@ function App() {
     );
 }
 
-export default WithBackground(App);
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentUser: (currentUser) => dispatch(setCurrentUser(currentUser)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WithBackground(App));

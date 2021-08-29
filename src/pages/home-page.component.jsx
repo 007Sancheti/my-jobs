@@ -9,19 +9,19 @@ const HomePage = () => {
         {
             id: 1,
             title: 'Get more visibility',
-            content:
+            description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
         },
         {
             id: 2,
             title: 'Organize your candidates',
-            content:
+            description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         },
         {
             id: 3,
             title: 'Verify their abilities',
-            content:
+            description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
         },
     ];
