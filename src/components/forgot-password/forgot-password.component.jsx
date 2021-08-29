@@ -21,9 +21,7 @@ const ForgotPassword = () => {
     let [showResetPage, setShowResetPage] = React.useState(false);
     let [resetToken, setResetToken] = React.useState('');
     const onSubmit = (values) => {
-        console.log(values);
         forgotPassword(values.email).then((res) => {
-            console.log(res);
             setResetToken(res.data.token);
             setShowResetPage(true);
         });

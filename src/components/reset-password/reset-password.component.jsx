@@ -24,7 +24,6 @@ let validationSchema = Yup.object({
 const ResetPassword = ({ resetToken, toast, setCurrentUser }) => {
     const onSubmit = (values, onSubmitProps) => {
         values.token = resetToken;
-        console.log('Form data', values);
         changePassword(values)
             .then((res) => setCurrentUser(res.data))
             .catch((error) => {

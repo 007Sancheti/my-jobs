@@ -68,7 +68,7 @@ function App({ currentUser, setCurrentUser }) {
                         currentUser ? (
                             <Redirect to='/landing' />
                         ) : (
-                            <SignUp toast={() => toast('Signup Successful')} />
+                            <SignUp toast={(message) => toast(message)} />
                         )
                     }
                 />

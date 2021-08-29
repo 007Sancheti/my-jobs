@@ -26,7 +26,6 @@ export const emailSignInFailure = (error) => ({
 });
 
 export const emailSignInStartAsync = (payload) => {
-    console.log(payload);
     return (dispatch) => {
         dispatch(emailSignInStart());
         login(payload)

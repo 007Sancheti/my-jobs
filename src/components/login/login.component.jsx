@@ -25,7 +25,6 @@ let validationSchema = Yup.object({
 
 const Login = ({ emailSignInStartAsync, error, toast }) => {
     const onSubmit = (values) => {
-        console.log('Form data', values);
         emailSignInStartAsync(values);
     };
     useEffect(() => {

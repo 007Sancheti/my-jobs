@@ -26,7 +26,6 @@ let validationSchema = Yup.object({
 
 const PostJob = ({ toast }) => {
     const onSubmit = (values, onSubmitProps) => {
-        console.log('formdata', values);
         let currentUser = JSON.parse(sessionStorage.getItem('user'));
         let headers = {
             Authorization: currentUser.token,

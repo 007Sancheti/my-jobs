@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import CustomForm from '../custom-form/custom-form.component';
 import CustomLabel from '../custom-label/custom-label.component';
@@ -29,18 +29,21 @@ let validationSchema = Yup.object({
 const SignUp = ({ toast, history }) => {
     const onSubmit = (values) => {
         values.userRole = userRole;
-        console.log('Form data', values);
-        signup(values).then((res) => {
-            toast();
-            history.push('/login');
-        });
+        signup(values)
+            .then(() => {
+                toast('Signup Successful');
+                history.push('/login');
+            })
+            .catch((error) => {
+                error.data.message
+                    ? toast(error.data.message)
+                    : error.data.errors.map((item) => {
+                          return toast(item[Object.keys(item)[0]]);
+                      });
+            });
     };
 
     const [userRole, setUserRole] = useState(0);
-
-    useEffect(() => {
-        console.log(userRole);
-    }, [userRole]);
 
     return (
         <div className='signup'>

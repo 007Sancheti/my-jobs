@@ -18,7 +18,7 @@ export const signup = (payload) => {
         .then((res) => {
             return res.data;
         })
-        .catch((err) => Promise.reject(err));
+        .catch((err) => Promise.reject(err.response));
 };
 
 export const postJob = (payload, headers) => {
