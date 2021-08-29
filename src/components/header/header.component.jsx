@@ -18,10 +18,10 @@ const Header = ({
     const [showLogout, setShowLogout] = useState(false);
     return (
         <div className='header-container'>
-            <div className='logo'>
+            <Link className='logo' to="/">
                 <span style={{ color: '#fff' }}>My</span>
                 <span style={{ color: '#43AFFF' }}>Jobs</span>
-            </div>
+            </Link>
             {isLoggedIn ? (
                 <div className='header-items'>
                     <Link className='post-job-link' to='/post-job'>

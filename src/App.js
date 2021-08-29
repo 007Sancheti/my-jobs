@@ -23,7 +23,8 @@ import ForgotPassword from './components/forgot-password/forgot-password.compone
 import ResetPassword from './components/reset-password/reset-password.component';
 import JobsPreview from './components/jobs-preview/jobs-preview.component';
 import { setCurrentUser } from './redux/user/user.actions';
-import usePagination from './custom-hooks/usePagination';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App({currentUser, setCurrentUser}) {
     const items = [
@@ -104,7 +105,6 @@ function App({currentUser, setCurrentUser}) {
         }
     ];
     const [page, setPage] = React.useState(1);
-    const [data, setPagination] = usePagination(items);
     const [open, setOpen] = React.useState(false);
     const [isLoggedIn] = useState(false);
 
@@ -114,7 +114,6 @@ function App({currentUser, setCurrentUser}) {
 
     const handleChange = (event, value) => {
         setPage(value);
-        setPagination(value);
         handleOpen();
     };
 
@@ -131,6 +130,7 @@ function App({currentUser, setCurrentUser}) {
                 <Route path='/:org/:repo/issues' component={IssueDetailsPage} />
                 <Route component={NotFound} />
             </Switch> */}
+            <ToastContainer />
             <Header isLoggedIn={currentUser} isLoginOrSignUpPage={isLoginOrSignUpPage}/>
             {/* <FormTextarea>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, praesentium? Unde quibusdam nostrum tempora voluptas provident laborum laudantium doloremque aliquid!</FormTextarea>
             <CustomLabel id='email'> Email address </CustomLabel>
@@ -178,7 +178,7 @@ function App({currentUser, setCurrentUser}) {
                     exact
                     path='/signup'
                     render={() =>
-                        currentUser ? <Redirect to='/landing' /> : <SignUp />
+                        currentUser ? <Redirect to='/landing' /> : <SignUp toast={()=> toast('Signup Successful')} />
                     }
                 />
                 <Route

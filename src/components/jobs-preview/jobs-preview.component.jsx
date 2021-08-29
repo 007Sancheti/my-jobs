@@ -6,6 +6,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { getAllJobs } from '../../api';
 import PaginationContainer from '../pagination/pagination.component';
 import './jobs-preview.styles.scss';
+import NoJobs from '../no-jobs/no-jobs.component';
 
 const JobsPreview = ({ currentUser }) => {
     let [items, setItems] = useState([]);
@@ -33,17 +34,19 @@ const JobsPreview = ({ currentUser }) => {
     return (
         <div className='jobs-preview'>
             <h3 className='title'>Jobs posted by you</h3>
-            <CustomCards
-                width='260px'
-                titleColor='#303F60'
-                items={slicedItems}
-            />
-            {items.length && (
+            {slicedItems.length ? (
+                <CustomCards
+                    width='260px'
+                    titleColor='#303F60'
+                    items={slicedItems}
+                />
+            ) : <NoJobs />}
+            {items.length ? (
                 <PaginationContainer
                     items={items}
                     setSlicedItems={computeSlicedItems}
                 />
-            )}
+            ) : null}
         </div>
     );
 };

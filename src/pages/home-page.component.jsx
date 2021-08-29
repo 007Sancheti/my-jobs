@@ -1,10 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import CustomButton from '../components/custom-button/custom-button.component';
 import CustomCards from '../components/custom-cards/custom-cards.component';
 import CompaniesViewer from '../components/companies-viewer/companies-viewer.component';
 import './home-page.styles.scss';
 
-const HomePage = () => {
+const HomePage = ({history}) => {
     const items = [
         {
             id: 1,
@@ -33,7 +34,7 @@ const HomePage = () => {
                     My<span style={{ color: '#43AFFF' }}>Jobs</span>
                 </h1>
                 <div className='get-started'>
-                    <CustomButton padding='14px 30px'>Get Started</CustomButton>
+                    <CustomButton onClick={()=>history.push('/signup')} padding='14px 30px'>Get Started</CustomButton>
                 </div>
             </div>
             <div className="office-girl-image" />
@@ -49,4 +50,4 @@ const HomePage = () => {
     );
 };
 
-export default HomePage;
+export default withRouter(HomePage);

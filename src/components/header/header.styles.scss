@@ -5,6 +5,8 @@
     justify-content: space-between;
     border-bottom: 2px solid #43AFFF33;
     .logo {
+        text-decoration: none;
+        cursor: pointer;
         font: normal normal bold 22px/27px Helvetica Neue;
     }
     .post-job-link {

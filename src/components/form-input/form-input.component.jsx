@@ -6,7 +6,6 @@ import './form-input.styles.scss';
 const FormInput = ({
     id,
     errormessage,
-    touched,
     ...otherProps
 }) => {
     return (

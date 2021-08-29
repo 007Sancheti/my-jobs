@@ -1,0 +1,31 @@
+.applicant-card {
+    background-color: white;
+    border: 1px solid #303F6080;
+    width: 280px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: baseline;
+        .avatar {
+            margin-right: 20px;
+        }
+        .flex-column {
+            display: flex;
+            flex-direction: column;
+            .applicant-name {
+                margin: 0;
+                font: normal normal medium 15px/18px Helvetica Neue;
+            }
+            .applicant-email {
+                margin: 0;
+                font: normal normal normal 15px/17px Helvetica Neue;
+                opacity: 80%;
+                overflow-wrap: anywhere;
+            }
+        }
+    }
+}

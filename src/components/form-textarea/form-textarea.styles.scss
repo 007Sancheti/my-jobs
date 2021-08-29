@@ -1,9 +1,17 @@
-.form-textarea {
+.textarea-container {
     margin-bottom: 20px;
-    padding: 15px 17px;
-    width: 100%;
-
-    &:focus {
-        outline-color: #43afff;
+    .form-textarea {
+        padding: 15px 17px;
+        width: 100%;
+    
+        &:focus {
+            outline-color: #43afff;
+        }
+    }
+    .error-message {
+        margin-top: 8px;
+        color: red;
+        font: normal normal normal 12px/14px Helvetica Neue;
+        text-align: right;
     }
 }

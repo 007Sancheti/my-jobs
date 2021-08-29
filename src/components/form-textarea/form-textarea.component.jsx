@@ -1,12 +1,22 @@
 import React from 'react';
+import { Field, ErrorMessage } from 'formik';
 
 import './form-textarea.styles.scss';
 
-const FormTextarea = ({ handleChange, id, placeholder, children, ...otherProps }) => {
+const FormTextarea = ({ id, ...otherProps }) => {
     return (
-            <textarea className='form-input' id={id} rows="4" cols="50" placeholder = {placeholder} onChange={handleChange} {...otherProps}>
-                {children}
-            </textarea>
+        <div className='textarea-container'>
+            <Field
+                as='textarea'
+                className='form-textarea'
+                id={id}
+                name={id}
+                {...otherProps}
+            />
+            <div className='error-message'>
+                <ErrorMessage name={id} />
+            </div>
+        </div>
     );
 };
 

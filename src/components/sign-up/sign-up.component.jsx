@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import CustomForm from '../custom-form/custom-form.component';
 import CustomLabel from '../custom-label/custom-label.component';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { signup } from '../../api';
 import './sign-up.styles.scss';
 
 const initialValues = {
@@ -17,27 +17,31 @@ const initialValues = {
     skills: '',
 };
 
-
 let validationSchema = Yup.object({
-    name: Yup.string().required('Required!'),
+    name: Yup.string()
+        .required('Required!')
+        .matches(/^[aA-zZ]+$/, 'Only alphabets are allowed & without space'),
     email: Yup.string().email('Invalid email format').required('Required!'),
     password: Yup.string().min(6).required('Required!'),
     confirmPassword: Yup.string().min(6).required('Required!'),
 });
 
-const SignUp = () => {
+const SignUp = ({ toast, history }) => {
     const onSubmit = (values) => {
         values.userRole = userRole;
         console.log('Form data', values);
-        axios
-            .post('https://jobs-api.squareboat.info/api/v1/auth/register', values)
-            .then((response) => (console.log(response)));
+        signup(values).then((res) => {
+            toast();
+            history.push('/login');
+        });
     };
 
     const [userRole, setUserRole] = useState(0);
+
     useEffect(() => {
         console.log(userRole);
     }, [userRole]);
+
     return (
         <div className='signup'>
             <Formik
@@ -158,4 +162,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default withRouter(SignUp);

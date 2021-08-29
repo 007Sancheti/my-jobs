@@ -38,6 +38,14 @@
 }
 
 .no-application-text {
-    color: #303F60;
+    color: #303f60;
     font: normal normal normal 20px/24px Helvetica Neue;
+}
+
+.applicant-cards {
+    display: flex;
+    flex-wrap: wrap;
+    &>.applicant-card:nth-child(2n+1) {
+        margin-left: 0;
+    }
 }
